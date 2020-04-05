@@ -60,17 +60,49 @@
                                 <img src="<?=base_url().$value->image?>" class="img-fluid img_look" alt="Image">
                                 <div class="mask-icon">
                                     <ul>
-                                        <li><a href="<?=base_url('Shop/productDetail/').$value->id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                        <li><a href="<?=base_url('Shop/productDetail/').$value->product_id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                        <!-- <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                        <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li> -->
                                     </ul>
-                                    <a class="cart" href="#">Add to Cart</a>
+                                     <?php 
+                                        if($this->session->userdata('logged_user')){
+                                            ?>
+                                                <a class="btn hvr-hover cartt" product="<?=$value->product_id?>" href="javascript:void(0)">Add to Cart</a>
+                                            <?php
+                                        }else{
+                                            ?>
+                                                <a class="btn hvr-hover cart log_in"  href="javascript:void(0)">Add to Cart</a>
+                                            <?php
+                                        } 
+                                    ?>
+                                    <!-- <a class="cart" href="#">Add to Cart</a> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
-
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        var cartUrl="<?=base_url('Cart/addToCart/')?>";
+                        $('.cartt').on('click',function(){
+                            var product_id=$(this).attr('product');
+                            // alert("Product Id: "+product_id);
+                            $.ajax({
+                                url:cartUrl,
+                                type:"post",
+                                data:{product_id:product_id},
+                                success:function(response){
+                                    response=JSON.parse(response);
+                                    if(response.code==1){                            
+                                     swal("Good job!", "You clicked the button!", "success");
+                                    }else{
+                                        swal("Ooops!", "Failed to Add!", "warning");
+                                    }
+                                }
+                            })
+                        });
+                    });
+                </script>
                 <!-- <div class="col-lg-3 col-md-6 special-grid fruits">
                     <div class="products-single fix">
                         <div class="box-img-hover">

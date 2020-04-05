@@ -118,7 +118,18 @@
                                         <li><a href="<?=base_url('Shop/productDetail/').$value->product_id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                         
                                     </ul>
-                                    <a class="cart" product="<?=$value->product_id?>" href="javascript:void(0)">Add to Cart</a>
+                                    <?php 
+                                        if($this->session->userdata('logged_user')){
+                                            ?>
+                                                <a class="cart cartt" product="<?=$value->product_id?>" href="javascript:void(0)">Add to Cart</a>
+                                            <?php
+                                        }else{
+                                            ?>
+                                                <a class="cart log_in" product="<?=$value->product_id?>" href="javascript:void(0)">Add to Cart</a>
+                                            <?php
+                                        } 
+                                    ?>
+                                    
                                 </div>
                             </div>
                             <div class="why-text">
@@ -137,7 +148,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
             var cartUrl="<?=base_url('Cart/addToCart/')?>";
-            $('.cart').on('click',function(){
+            $('.cartt').on('click',function(){
                 var product_id=$(this).attr('product');
                 // alert("Product Id: "+product_id);
                 $.ajax({

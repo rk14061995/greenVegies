@@ -47,11 +47,21 @@
                                                         <img src="<?=base_url().$value->image?>" class="img-fluid" alt="Image" style="max-width: 400px; max-height: 200px">
                                                         <div class="mask-icon">
                                                             <ul>
-                                                                 <li><a href="<?=base_url('Shop/productDetail/').$value->id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                                 <li><a href="<?=base_url('Shop/productDetail/').$value->product_id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                                                 <!-- <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                                                                 <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li> -->
                                                             </ul>
-                                                            <a class="cart" product="<?=$value->product_id?>" href="javascript:void(0)">Add to Cart</a>
+                                                            <?php 
+                                                                if($this->session->userdata('logged_user')){
+                                                                    ?>
+                                                                        <a class="btn hvr-hover cartt" product="<?=$value->product_id?>" href="javascript:void(0)">Add to Cart</a>
+                                                                    <?php
+                                                                }else{
+                                                                    ?>
+                                                                        <a class="btn hvr-hover cart log_in"  href="javascript:void(0)">Add to Cart</a>
+                                                                    <?php
+                                                                } 
+                                                            ?>
                                                         </div>
                                                     </div>
                                                     <div class="why-text">
@@ -81,7 +91,7 @@
                                                             <img src="<?=base_url().$value->image?>" class="img-fluid" alt="Image" style="max-width: 400px; max-height: 200px">
                                                             <div class="mask-icon">
                                                                 <ul>
-                                                                    <li><a href="<?=base_url('Shop/productDetail/').$value->id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+                                                                    <li><a href="<?=base_url('Shop/productDetail/').$value->product_id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
                                                                     <!-- <li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
                                                                     <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li> -->
                                                                 </ul>
@@ -95,7 +105,19 @@
                                                         <h4 class="text-info"> <a href="<?=base_url('Shop/productDetail/').$value->id?>"><?=ucwords($value->name)?></a></h4>
                                                         <h5> <del><?=$webDetail->currency_?> <?=$value->price?></del> <?=$webDetail->currency_?> <?=($value->price)-($value->discount)?></h5>
                                                         <p><?=ucwords($value->description)?></p>
-                                                        <a class="btn hvr-hover cart" product="<?=$value->product_id?>" href="javascript:void(0)">Add to Cart</a>
+
+                                                        <?php 
+                                                            if($this->session->userdata('logged_user')){
+                                                                ?>
+                                                                    <a class="btn hvr-hover cartt" product="<?=$value->product_id?>" href="javascript:void(0)">Add to Cart</a>
+                                                                <?php
+                                                            }else{
+                                                                ?>
+                                                                    <a class="cart log_in btn hvr-hover "  href="javascript:void(0)">Add to Cart</a>
+                                                                <?php
+                                                            } 
+                                                        ?>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -181,7 +203,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
             var cartUrl="<?=base_url('Cart/addToCart/')?>";
-            $('.cart').on('click',function(){
+            $('.cartt').on('click',function(){
                 var product_id=$(this).attr('product');
                 // alert("Product Id: "+product_id);
                 $.ajax({

@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <form action="<?=base_url('Cart/addToCartFromShop')?>" method="post" enctype="multipart/form-data">
-                        <input type="text" value="<?=$Item[0]->product_id?>" name="product_id">
+                        <input type="hidden" value="<?=$Item[0]->product_id?>" name="product_id">
                         <div class="single-product-details">
                             <h2><?=ucwords($Item[0]->name)?></h2>
                             <h5> <del><?=$webDetail->currency_?> <?=$Item[0]->price?></del> <?=$webDetail->currency_?> <?=($Item[0]->price)-($Item[0]->discount)?></h5>
@@ -59,7 +59,7 @@
                                 <li>
                                     <div class="form-group quantity-box">
                                         <label class="control-label">Quantity</label>
-                                        <input class="form-control" value="0" min="0" max="20" name="quantity" type="number">
+                                        <input class="form-control" value="1" min="0" max="8" name="quantity" type="number">
                                     </div>
                                 </li>
                             </ul>
@@ -67,7 +67,18 @@
                             <div class="price-box-bar">
                                 <div class="cart-and-bay-btn">
                                     <!-- <a class="btn hvr-hover" data-fancybox-close="" href="#">Buy Now</a> -->
-                                    <input type="submit" value="Add To Cart" class="btn hvr-hover">
+                                    <?php 
+                                        if($this->session->userdata('logged_user')){
+                                            ?>
+                                                <input type="submit" value="Add To Cart" class="btn hvr-hover">
+                                            <?php
+                                        }else{
+                                            ?>
+                                                <a class="cart log_in btn btn-info" href="javascript:void(0)">Add to Cart</a>
+                                            <?php
+                                        } 
+                                    ?>
+                                    
                                    <!--  <a class="btn hvr-hover cartt" data-fancybox-close="" href="javascript:void(0)">Add to cart</a> -->
                                 </div>
                             </div>

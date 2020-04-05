@@ -90,8 +90,16 @@
                 </div> -->
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 offset-md-3">
                     <div class="login-box">
-                        <button id="log_in" class="selectpicker show-tick ">Log In</button>
-                        <button id="sign_in" class="selectpicker show-tick ">Sign Up</button>
+                        <?php
+                            // print_r(unserialize($this->session->userdata('logged_user')));
+                            if($this->session->userdata('logged_user')){
+                                echo '<a href="'.base_url('API/logOut').'" id="log_out" class="btn btn-danger">Log Out</a>';
+                            }else{
+                                echo '<button class="log_in" class="selectpicker show-tick ">Log In</button><button id="sign_in" class="selectpicker show-tick ">Sign Up</button>';
+                            }
+                        ?>
+                        
+                        
                     </div>
                     
                 </div>
@@ -120,7 +128,7 @@
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
 						<li class="nav-item"><a class="nav-link" href="<?=base_url('Home')?>">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="<?=base_url('About')?>">About Us</a></li>
+						<!-- <li class="nav-item"><a class="nav-link" href="<?=base_url('About')?>">About Us</a></li> -->
 						<!-- <li class="dropdown">
 							<a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">SHOP</a>
 							<ul class="dropdown-menu">
@@ -239,10 +247,10 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="InputEmail" class="mb-0">Email Address</label>
-                            <input type="email" class="form-control" id="InputEmail" placeholder="Enter Email"> </div>
+                            <input type="email" class="form-control" name="em_ail" placeholder="Enter Email"> </div>
                         <div class="form-group col-md-6">
                             <label for="InputPassword" class="mb-0">Password</label>
-                            <input type="password" class="form-control" id="InputPassword" placeholder="Password"> </div>
+                            <input type="password" class="form-control" name="pass_w" placeholder="Password"> </div>
                     </div>
                     <button type="submit" class="btn hvr-hover">Login</button>
                 </form>
@@ -290,10 +298,41 @@
       </div>
     </div>
     <script type="text/javascript">
-        $(document).on('click','#log_in',function(){
+        $(document).on('click','.log_in',function(){
             $('#loginModal').modal('show');
         });
         $(document).on('click','#sign_in',function(){
             $('#signModal').modal('show');
         });
+        $(document).on('submit','#formLogin',function(e){
+            e.preventDefault();
+            var formData= new FormData($(this)[0]);
+            $.ajax({
+                url:"<?=base_url('API/loginValidate')?>",
+                type:"post",
+                cache:false,
+                processData:false,
+                contentType:false,
+                data:formData,
+                success:function(res){
+                    console.log(res);
+                    res=JSON.parse(res);
+                    if(res.code==1){
+                        location.reload();
+                    }else{
+                        swal("Ooops..!", "Invalid Email or Password", "error");
+                    }
+                }
+            });
+        });
+        $(document).on('click','#log_out',function(){
+            $.ajax({
+                url:"<?=base_url('API/logOut')?>",
+                type:"post",
+                success:function(res){
+                    console.log(res);
+                }
+            });
+        });
+        
     </script>
