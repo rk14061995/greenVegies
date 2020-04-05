@@ -44,7 +44,7 @@
                                                         <div class="type-lb">
                                                             <p class="sale">Sale</p>
                                                         </div>
-                                                        <img src="<?=base_url().$value->image?>" class="img-fluid" alt="Image" style="max-width: 400px; max-height: 200px">
+                                                        <img src="<?=base_url('assets/products_image/').$value->image?>" class="img-fluid" alt="Image" style="max-width: 400px; max-height: 200px">
                                                         <div class="mask-icon">
                                                             <ul>
                                                                  <li><a href="<?=base_url('Shop/productDetail/').$value->product_id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -88,7 +88,7 @@
                                                             <div class="type-lb">
                                                                 <p class="sale">Sale</p>
                                                             </div>
-                                                            <img src="<?=base_url().$value->image?>" class="img-fluid" alt="Image" style="max-width: 400px; max-height: 200px">
+                                                            <img src="<?=base_url('assets/products_image/').$value->image?>" class="img-fluid" alt="Image" style="max-width: 400px; max-height: 200px">
                                                             <div class="mask-icon">
                                                                 <ul>
                                                                     <li><a href="<?=base_url('Shop/productDetail/').$value->product_id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

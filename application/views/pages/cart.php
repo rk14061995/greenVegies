@@ -52,7 +52,7 @@
                                         <tr>
                                             <td class="thumbnail-img">
                                                 <a href="#">
-                                                    <img class="img-fluid rounded-circle" src="<?=base_url().$items['options']['image'];?>" alt="" />
+                                                    <img class="img-fluid rounded-circle" src="<?=base_url('assets/products_image/').$items['options']['image'];?>" alt="" />
                                                 </a>
                                             </td>
                                             <td class="name-pr">

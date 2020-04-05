@@ -194,7 +194,7 @@
                          <?php $totalPrice=0;?>
                         <?php foreach ($arrayItems as $items) : ?>
                         <li>
-                            <a href="#" class="photo"><img src="<?=base_url().$items['options']['image'];?>" class="cart-thumb rounded-circle" alt="" /></a>
+                            <a href="#" class="photo"><img src="<?=base_url('assets/products_image/').$items['options']['image'];?>" class="cart-thumb rounded-circle" alt="" /></a>
                             <h6><a href="#"><?=ucwords($items['name']);?></a></h6>
                             <p><?=$items['qty']?> x - <span class="price"><?=$webDetail->currency_?> <?=$items['price'];?></span></p>
                         </li>

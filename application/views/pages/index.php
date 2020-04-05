@@ -6,7 +6,7 @@
         <ul class="slides-container">
             <?php foreach ($banners_ as $value) : ?>
                 <li class="text-center">
-                    <img src="<?=base_url('assets/')?>images/banner/<?=$value->banner_path?>" alt="">
+                    <img src="<?=base_url('assets/')?>banner_image/<?=$value->banner_path?>" alt="">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
@@ -34,7 +34,7 @@
                 <?php foreach ($categories as $key => $value) : ?>
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                         <div class="shop-cat-box">
-                            <img class="img-fluid" src="<?=base_url('assets/')?>images/category/<?=$value->image_?>" alt="" />
+                            <img class="img-fluid" src="<?=base_url('assets/')?>category_image/<?=$value->image_?>" alt="" />
                             <a class="btn hvr-hover" href="<?=base_url('Shop/').$value->category?>"><?=ucwords($value->category)?></a>
                         </div>
                     </div>
@@ -57,13 +57,13 @@
     </div>
     <!-- End Categories -->
 	
-	<div class="box-add-prod<?=base_url('assets/')?>ucts">
+	<div class="box-add-products">
 		<div class="container">
 			<div class="row">
                  <?php foreach ($banners_ as $value) : ?>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="offer-box-products">
-						<img class="img-fluid" src="<?=base_url('assets/')?>images/banner/<?=$value->banner_path?>" alt="" />
+						<img class="img-fluid" src="<?=base_url('assets/')?>banner_image/<?=$value->banner_path?>" alt="" />
 					</div>
 				</div>
             <?php endforeach; ?>
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-12">
                     <div class="special-menu text-center">
                         <div class="button-group filter-button-group">
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <?php
                 if($this->session->flashdata('msg')){
                     echo '<div class="alert alert-info">'.$this->session->flashdata('msg').'</div>';
@@ -112,7 +112,7 @@
                                 <div class="type-lb">
                                     <p class="sale">Sale</p>
                                 </div>
-                                <img src="<?=base_url().$value->image?>" class="img-fluid" alt="Image"  style="max-width: 400px; max-height: 200px">
+                                <img src="<?=base_url('assets/products_image/').$value->image?>" class="img-fluid" alt="Image"  style="max-width: 400px; max-height: 200px">
                                 <div class="mask-icon">
                                     <ul>
                                         <li><a href="<?=base_url('Shop/productDetail/').$value->product_id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

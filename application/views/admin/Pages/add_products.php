@@ -114,7 +114,7 @@ $(document).on('submit','#products',function(e){
              {
              swal("Category!", "Already Exist", "error")
              }
-             window.location.href='<?=base_url("Category/CategorySection")?>';
+             // window.location.href='<?=base_url("Category/CategorySection")?>';
         }
      });
 });

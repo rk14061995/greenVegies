@@ -46,7 +46,7 @@
 	        
 			 $this->load->view('admin/Layout/header');
 			
-	 	
+	 	}
 	 }
 
 ?>

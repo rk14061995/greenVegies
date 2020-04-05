@@ -67,7 +67,7 @@
                     <td><?=$row->totl_quant?></td>
                     <td><?=$row->quant_type?></td>
                      <td><?=$row->qty_left?></td>
-                    <td><a href="<?=base_url('Building/editBuilding/').$row->product_id?>"  class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style building">Edit</a></td>
+                    <!-- <td><a href="<?=base_url('Building/editBuilding/').$row->product_id?>"  class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style building">Edit</a></td> -->
                     <td><a href="javascript:void(0)" product_id="<?=$row->product_id?>" class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style1 deleteproduct">Delete</a></td>
                   </tr>
                 <?php
