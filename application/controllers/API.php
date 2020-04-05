@@ -28,6 +28,17 @@
 	 		}
 	 		redirect('Home');
 	 	}
+	 	public function regNewUser(){
+	 		$name=$this->input->post('first_name').' '.$this->input->post('last_name');
+	 		$data=array("name"=>$name,"email"=>$this->input->post('email'),"password"=>$this->input->post('password'));
+	 		$res=$this->API->reg_user($data);
+	 		switch ($res) {
+	 			case '0': die(json_encode(array('code'=>0,'msg'=>"Failed to register User."))); break;
+	 			case '1': die(json_encode(array('code'=>1,'msg'=>"Registered Successfully."))); break;
+	 			case '2': die(json_encode(array('code'=>2,'msg'=>"User with same Email already exists.")));
+	 			default: die(json_encode(array('code'=>3,'msg'=>"Server Error.")));
+	 		}
+	 	}
 	 	
 	 }
 

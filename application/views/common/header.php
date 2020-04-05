@@ -73,7 +73,15 @@
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="<?=base_url('User')?>"><i class="fa fa-user s_color"></i> My Account</a></li>
+                            <?php
+                                 if($this->session->userdata('logged_user')){
+                                    ?>
+                                        <li><a href="<?=base_url('User')?>"><i class="fa fa-user s_color"></i> My Account</a></li>
+                                    <?php
+                                 }
+
+                            ?>
+                            
                             <!-- <li><a href="#"><i class="fas fa-location-arrow"></i> Our location</a></li> -->
                             <!-- <li><a href="#"><i class="fas fa-headset"></i> Contact Us</a></li> -->
                         </ul>
@@ -278,18 +286,18 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="InputName" class="mb-0">First Name</label>
-                            <input type="text" class="form-control" id="InputName" placeholder="First Name"> </div>
+                            <input type="text" class="form-control" name="first_name" placeholder="First Name"> </div>
                         <div class="form-group col-md-6">
                             <label for="InputLastname" class="mb-0">Last Name</label>
-                            <input type="text" class="form-control" id="InputLastname" placeholder="Last Name"> </div>
+                            <input type="text" class="form-control" name="last_name" placeholder="Last Name"> </div>
                         <div class="form-group col-md-6">
                             <label for="InputEmail1" class="mb-0">Email Address</label>
-                            <input type="email" class="form-control" id="InputEmail1" placeholder="Enter Email"> </div>
+                            <input type="email" class="form-control" name="email" placeholder="Enter Email"> </div>
                         <div class="form-group col-md-6">
                             <label for="InputPassword1" class="mb-0">Password</label>
-                            <input type="password" class="form-control" id="InputPassword1" placeholder="Password"> </div>
+                            <input type="password" class="form-control" name="password" placeholder="Password"> </div>
                     </div>
-                    <button type="submit" class="btn hvr-hover">Register</button>
+                    <input type="submit" class="btn hvr-hover">Register</button>
                 </form>
             </div>
           </div>
@@ -325,6 +333,29 @@
                 }
             });
         });
+        $(document).on('submit','#formRegister',function(e){
+            e.preventDefault();
+            var formData= new FormData($(this)[0]);
+            $.ajax({
+                url:"<?=base_url('API/regNewUser')?>",
+                type:"post",
+                cache:false,
+                processData:false,
+                contentType:false,
+                data:formData,
+                success:function(res){
+                    // console.log(res);
+                    res=JSON.parse(res);
+                    if(res.code==1){
+                        swal("Great..!", "Registered Successfully.", "success");
+                        location.reload();
+                    }else{
+                        swal("Ooops..!", res.msg, "error");
+                    }
+                }
+            });
+        });
+        
         $(document).on('click','#log_out',function(){
             $.ajax({
                 url:"<?=base_url('API/logOut')?>",
