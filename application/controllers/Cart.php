@@ -16,6 +16,37 @@
 	 		$this->load->view('pages/cart');
 	 		$this->load->view('common/footer');
 	 	}
+	 	public function orderPlaced(){
+	 		$data['categories']=$this->db->order_by('rand()')->get('categories')->result();
+	 		// echo 'good to go ';
+	 		$data['webDetail']=$this->db->get('website_name_logo')->row();
+	 		$data['gallery_']=$this->db->join('categories','categories.id= crops_.veg_category')->order_by('rand()')->get('crops_')->result();
+
+	 		print_r($cartItems=$this->cart->contents());
+	 		foreach ($cartItems as $key => $value) {
+	 			// print_r($value);
+	 			// `cart`(`id`, `user_id`, `product_id`, `quantity`, `price`);
+	 			// [id] => Product-Id-7
+	    //         [qty] => 1
+	    //         [price] => 50
+	    //         [name] => peas
+	    //         [options] => Array
+	    //             (
+	    //                 [image] => coupon_121218044337.jpg
+	    //                 [product_id] => 7
+	    //                 [quant_type] => Kg
+	    //             )
+
+	    //         [rowid] => ccf53d5440335065386229916cb9f864
+	    //         [subtotal] => 50
+	            $session=unserialize($this->session->logged_user);
+	         $order=array("user_id"=>$session[0]->id,"product_id"=>$value['options'],"quantity"=>$value['qty'],"price"=>$value['price']);
+	         print_r($order);   
+	 		}
+	 		$this->load->view('common/header',$data);
+	 		$this->load->view('pages/orderConfirmed');
+	 		$this->load->view('common/footer');
+	 	}
 	 	public function addToCart(){
 	 		$productDetails=$this->db->where('product_id',$this->input->post('product_id'))->get('crops_')->row();
 	 		// print_r($productDetails);

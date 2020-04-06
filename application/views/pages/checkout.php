@@ -1,6 +1,8 @@
 <?php
     if($this->session->userdata('logged_user')){
-       print_r($session=unserialize($this->session->logged_user))    ;
+       $session=unserialize($this->session->logged_user);
+    }else{
+        redirect('Home');
     }
 
 ?>
@@ -91,19 +93,22 @@
                                 <input type="checkbox" class="custom-control-input" id="same-address">
                                 <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
                             </div> -->
-                            <div class="custom-control custom-checkbox">
+                            <!-- <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="save-info">
                                 <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                            </div> -->
+                            <!-- <hr class="mb-4"> -->
+                            <div class="title-left">
+                                <h3>Payment</h3>
                             </div>
-                            <hr class="mb-4">
                             <div class="title"> <span>Payment</span> </div>
                             <div class="d-block my-3">
-                                <div class="custom-control custom-radio">
+                                <!-- <div class="custom-control custom-radio">
                                     <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
                                     <label class="custom-control-label" for="credit">Online</label>
-                                </div>
+                                </div> -->
                                 <div class="custom-control custom-radio">
-                                    <input id="cod" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                    <input id="cod" name="paymentMethod" type="radio" class="custom-control-input" checked required>
                                     <label class="custom-control-label" for="cod">Cash On Delivery</label>
                                 </div>
                                 
@@ -208,7 +213,7 @@
                                 </div>
                                 <hr> </div>
                         </div>
-                        <div class="col-12 d-flex shopping-box"> <a href="checkout.html" class="ml-auto btn hvr-hover">Place Order</a> </div>
+                        <div class="col-12 d-flex shopping-box"> <a href="<?=base_url('Cart/orderPlaced')?>" class="ml-auto btn hvr-hover">Place Order</a> </div>
                     </div>
                 </div>
             </div>
