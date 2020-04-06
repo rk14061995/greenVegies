@@ -29,10 +29,23 @@
 	 		redirect('Home');
 	 	}
 	 	public function verifyOTP(){
+	 		// echo $this->session->userdata('otp').' || '.$this->input->post('otp_') ;
 	 		if($this->session->userdata('otp')==$this->input->post('otp_')){
-	 			die(json_encode(array('code'=>1,'msg'=>"Registered Successfully.")));
+	 			if($this->verifyThisUser($this->input->post('mobile_no'))){
+	 				die(json_encode(array('code'=>1,'msg'=>"Registered Successfully.")));
+	 			}else{
+	 				die(json_encode(array('code'=>23,'msg'=>"Failed To Verify.")));
+	 			}
+	 			
 	 		}else{
 	 			die(json_encode(array('code'=>0,'msg'=>"Failed to register")));
+	 		}
+	 	}
+	 	public function verifyThisUser($mobile){
+	 		if($this->db->where('phone',$mobile)->update('user',array('verified'=>1))){
+	 			return true;
+	 		}else{
+	 			return false;
 	 		}
 	 	}
 	 	public function regNewUser(){
@@ -40,8 +53,9 @@
 	 		$data=array("name"=>$name,"phone"=>$this->input->post('mobile_'),"email"=>$this->input->post('email'),"password"=>base64_encode($this->input->post('password')));
 	 		$res=$this->API->reg_user($data);
 	 		if($res==1){
-	 			$this->sendOtp();
 	 			$otp=rand(11111,99999);
+	 			$this->sendOtp($otp);
+	 			
 	 			$this->session->set_userdata('otp',$otp);
 	 		}
 	 		switch ($res) {
@@ -51,7 +65,7 @@
 	 			default: die(json_encode(array('code'=>3,'msg'=>"Server Error.")));
 	 		}
 	 	}
-	 	public function sendOtp(){
+	 	public function sendOtp($otp){
 	 		// Authorisation details.
 			$username = "greenvegiess@gmail.com";
 			$hash = "77839a7e1daae7dea24bf3c6f36d06dcf2f2d460e6c99ae6aeeae14a0065171d";
@@ -62,7 +76,7 @@
 			// Data for text message. This is the text message data.
 			$sender = "TXTLCL"; // This is who the message appears to be from.
 			$numbers = "916397392256"; // A single number or a comma-seperated list of numbers
-			$message = "This is a test message from the PHP API script.";
+			$message = "Your verification OTP is : ".$otp;
 			// 612 chars or less
 			// A single number or a comma-seperated list of numbers
 			$message = urlencode($message);
