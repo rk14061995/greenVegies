@@ -30,7 +30,7 @@
 	 	}
 	 	public function regNewUser(){
 	 		$name=$this->input->post('first_name').' '.$this->input->post('last_name');
-	 		$data=array("name"=>$name,"email"=>$this->input->post('email'),"password"=>$this->input->post('password'));
+	 		$data=array("name"=>$name,"email"=>$this->input->post('email'),"password"=>base64_encode($this->input->post('password')));
 	 		$res=$this->API->reg_user($data);
 	 		switch ($res) {
 	 			case '0': die(json_encode(array('code'=>0,'msg'=>"Failed to register User."))); break;
@@ -38,6 +38,32 @@
 	 			case '2': die(json_encode(array('code'=>2,'msg'=>"User with same Email already exists.")));
 	 			default: die(json_encode(array('code'=>3,'msg'=>"Server Error.")));
 	 		}
+	 	}
+	 	public function sendFeedBack(){
+	 		print_r($_POST);
+	 		Array
+			(
+			    [name] => sdfsd
+			    [email] => rahulkumar14061995@gmail.com
+			    [subject] => sdf
+			    [message] => sdfsdf
+			)
+			// `feedback
+			$data=array(
+						"name"=>,
+						"email"=>,
+						"phone"=>,
+						"message"=>,
+						);
+	 		// $name=$this->input->post('first_name').' '.$this->input->post('last_name');
+	 		// $data=array("name"=>$name,"email"=>$this->input->post('email'),"password"=>base64_encode($this->input->post('password')));
+	 		// $res=$this->API->reg_user($data);
+	 		// switch ($res) {
+	 		// 	case '0': die(json_encode(array('code'=>0,'msg'=>"Failed to register User."))); break;
+	 		// 	case '1': die(json_encode(array('code'=>1,'msg'=>"Registered Successfully."))); break;
+	 		// 	case '2': die(json_encode(array('code'=>2,'msg'=>"User with same Email already exists.")));
+	 		// 	default: die(json_encode(array('code'=>3,'msg'=>"Server Error.")));
+	 		// }
 	 	}
 	 	
 	 }

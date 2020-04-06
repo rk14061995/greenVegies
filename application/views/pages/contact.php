@@ -24,7 +24,7 @@
                     <div class="contact-form-right">
                         <h2>GET IN TOUCH</h2>
                         <p><?=$webDetail->tag_line?></p>
-                        <form id="contactForm">
+                        <form id="contactForm_">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -34,19 +34,19 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Your Email" id="email" class="form-control" name="name" required data-error="Please enter your email">
+                                        <input type="text" placeholder="Your Email" id="email" class="form-control" name="email" required data-error="Please enter your email">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="subject" name="name" placeholder="Subject" required data-error="Please enter your Subject">
+                                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required data-error="Please enter your Subject">
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <textarea class="form-control" id="message" placeholder="Your Message" rows="4" data-error="Write your message" required></textarea>
+                                        <textarea class="form-control" id="message" placeholder="Your Message" rows="4" data-error="Write your message" name="message" required></textarea>
                                         <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="submit-button text-center">
@@ -80,3 +80,28 @@
         </div>
     </div>
     <!-- End Cart -->
+    
+    <script type="text/javascript">
+        $(document).on('submit','#contactForm_',function(e){
+            e.preventDefault();
+            var formData= new FormData($(this)[0]);
+            $.ajax({
+                url:"<?=base_url('API/sendFeedBack')?>",
+                type:"post",
+                cache:false,
+                processData:false,
+                contentType:false,
+                data:formData,
+                success:function(res){
+                    // console.log(res);
+                    res=JSON.parse(res);
+                    if(res.code==1){
+                        swal("Great..!", "We Will Response You Soon.", "success");
+                        location.reload();
+                    }else{
+                        swal("Ooops..!", res.msg, "error");
+                    }
+                }
+            });
+        });
+    </script>

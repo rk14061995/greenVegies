@@ -2,8 +2,15 @@
     $webDetail=$this->db->get('website_name_logo')->row();
 ?>
 <style type="text/css">
-    .img_short{
-        
+
+    @media only screen and (max-width: 400px) {
+      .cover-slides{
+        height: 300px ;
+
+      }
+     /* .img_short{
+            height: 300px ;        
+      }*/
     }
 </style>
     <!-- Start Slider -->
