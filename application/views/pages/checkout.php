@@ -95,18 +95,15 @@
                             <div class="d-block my-3">
                                 <div class="custom-control custom-radio">
                                     <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                                    <label class="custom-control-label" for="credit">Credit card</label>
+                                    <label class="custom-control-label" for="credit">Online</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="debit">Debit card</label>
+                                    <input id="cod" name="paymentMethod" type="radio" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="cod">Cash On Delivery</label>
                                 </div>
-                                <div class="custom-control custom-radio">
-                                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                    <label class="custom-control-label" for="paypal">Paypal</label>
-                                </div>
+                                
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="cc-name">Name on card</label>
                                     <input type="text" class="form-control" id="cc-name" placeholder="" required> <small class="text-muted">Full name as displayed on card</small>
@@ -141,7 +138,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr class="mb-1"> </form>
+                            <hr class="mb-1"> --> </form>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-6 mb-3">
@@ -158,11 +155,11 @@
                                     <div class="ml-4 mb-2 small">(3-7 business days)</div>
                                     <div class="custom-control custom-radio">
                                         <input id="shippingOption2" name="shipping-option" class="custom-control-input" type="radio">
-                                        <label class="custom-control-label" for="shippingOption2">Express Delivery</label> <span class="float-right font-weight-bold">$10.00</span> </div>
-                                    <div class="ml-4 mb-2 small">(2-4 business days)</div>
+                                        <label class="custom-control-label" for="shippingOption2">Express Delivery</label> <span class="float-right font-weight-bold"><?=$webDetail->currency_?> 10.00</span> </div>
+                                    <!-- <div class="ml-4 mb-2 small">(2-4 business days)</div>
                                     <div class="custom-control custom-radio">
                                         <input id="shippingOption3" name="shipping-option" class="custom-control-input" type="radio">
-                                        <label class="custom-control-label" for="shippingOption3">Next Business day</label> <span class="float-right font-weight-bold">$20.00</span> </div>
+                                        <label class="custom-control-label" for="shippingOption3">Next Business day</label> <span class="float-right font-weight-bold">$20.00</span> </div> -->
                                 </div>
                             </div>
                         </div>
