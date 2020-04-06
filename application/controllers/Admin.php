@@ -47,6 +47,20 @@
 			 $this->load->view('admin/Layout/header');
 			
 	 	}
+	 	public function webDetails()
+		{
+	// 		
+	    	 $data['webDetails']=$this->db->get('website_name_logo');
+	   // 	 $data['product_dashboard']=$this->Dashboard_model->product_Detail();
+	   //      $data['feedback_dashboard']=$this->Dashboard_model->feedback_Detail();
+	   //      $data['user_dashboard']=$this->Dashboard_model->user_Detail();
+	        
+			 $this->load->view('admin/Layout/header');
+		
+		    $this->load->view('admin/Pages/webDetails',$data);
+			
+	 	}
+	 	
 	 }
 
 ?>

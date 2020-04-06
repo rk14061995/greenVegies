@@ -21,7 +21,7 @@
                     <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
 
-                            <div class="carousel-item active"> <img class="d-block w-100" src="<?=base_url().$Item[0]->image?>" alt="First slide"> </div>
+                            <div class="carousel-item active"> <img class="d-block w-100" src="<?=base_url('assets/products_image/').$Item[0]->image?>" alt="First slide"> </div>
                            <!--  <div class="carousel-item"> <img class="d-block w-100" src="images/big-img-02.jpg" alt="Second slide"> </div>
                             <div class="carousel-item"> <img class="d-block w-100" src="images/big-img-03.jpg" alt="Third slide"> </div> -->
                         </div>
@@ -137,7 +137,7 @@
     							</div>
     							<div class="media-body">
     								<p><?=$value->review?></p>
-    								<small class="text-muted">Posted by Anonymous on <?=$value->posted_od?></small>
+    								<small class="text-muted">Posted by Anonymous on <?=$value->posted_on?></small>
     							</div>
     						</div>
     						<hr>
@@ -159,7 +159,7 @@
                             <div class="item">
                                 <div class="products-single fix">
                                     <div class="box-img-hover">
-                                        <img src="<?=base_url().$value->image?>" class="img-fluid" alt="Image" style="max-width: 400px; height: 200px; max-height: 200px">
+                                        <img src="<?=base_url('assets/products_image/').$value->image?>" class="img-fluid" alt="Image" style="max-width: 400px; height: 200px; max-height: 200px">
                                         <div class="mask-icon">
                                             <ul>
                                                 <li><a href="<?=base_url('Shop/productDetail/').$value->id?>" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

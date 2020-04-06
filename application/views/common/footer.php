@@ -10,7 +10,7 @@
             <?php foreach ($gallery_ as $key => $value) : ?>
                 <div class="item">
                     <div class="ins-inner-box">
-                        <img src="<?=base_url().$value->image?>" alt="" style="max-height: 200px"/>
+                        <img src="<?=base_url('assets/products_image/').$value->image?>" alt="" style="max-height: 200px"/>
                         <!-- <div class="hov-in">
                             <a href="#"><i class="fab fa-instagram"></i></a>
                         </div> -->
@@ -95,8 +95,8 @@
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
     <!-- ALL JS FILES -->
-    <script src="<?=base_url('assets/')?>js/jquery-3.2.1.min.js"></script>
-    <script src="<?=base_url('assets/')?>js/popper.min.js"></script>
+    <!--<script src="<?=base_url('assets/')?>js/jquery-3.2.1.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper.min.js"></script>
     <script src="<?=base_url('assets/')?>js/bootstrap.min.js"></script>
     <!-- ALL PLUGINS -->
     <script src="<?=base_url('assets/')?>js/jquery.superslides.min.js"></script>

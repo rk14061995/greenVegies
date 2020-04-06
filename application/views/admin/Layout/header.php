@@ -19,7 +19,7 @@
     		<div class="col-md-2 col-12" >
     			<div class="sidebar" id="side">
                     <div class="logo">
-                        <h4 class="text-white admin p-3">Admin Pannel</h4>
+                        <h4 class="text-white admin p-3">Admin Panel</h4>
                         <a href="javascript:void(0)" class="closebtn" id="close">×</a>
                     </div>
 			        <hr>
@@ -91,6 +91,17 @@
 				            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
 				            
 				               <a class="dropdown-item" href="<?=base_url('Users/UsersReviewsSection')?>"><i class="fa fa-eye" aria-hidden="true"></i> <strong>Users Reviews</strong></a>
+				                    
+				            </div>
+				          </li>
+				          <li class="nav-item dropdown">
+				            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				              <i class="fa fa-male" aria-hidden="true"></i>
+				              <span>Website Details</span>
+				            </a>
+				            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+				            
+				               <a class="dropdown-item" href="<?=base_url('Admin/webDetails')?>"><i class="fa fa-eye" aria-hidden="true"></i> <strong>Website Details</strong></a>
 				                    
 				            </div>
 				          </li>
