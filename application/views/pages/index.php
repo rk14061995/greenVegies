@@ -170,7 +170,7 @@
                     success:function(response){
                         response=JSON.parse(response);
                         if(response.code==1){                            
-                         swal("Good job!", "You clicked the button!", "success");
+                         swal("Good job!", "Product Added To Cart!", "success");
                         }else{
                             swal("Ooops!", "Failed to Add!", "warning");
                         }
