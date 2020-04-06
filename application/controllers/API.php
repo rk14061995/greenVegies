@@ -28,42 +28,71 @@
 	 		}
 	 		redirect('Home');
 	 	}
+	 	public function verifyOTP(){
+	 		if($this->session->userdata('otp')==$this->input->post('otp_')){
+	 			die(json_encode(array('code'=>1,'msg'=>"Registered Successfully.")));
+	 		}else{
+	 			die(json_encode(array('code'=>0,'msg'=>"Failed to register")));
+	 		}
+	 	}
 	 	public function regNewUser(){
-	 		$name=$this->input->post('first_name').' '.$this->input->post('last_name');
-	 		$data=array("name"=>$name,"email"=>$this->input->post('email'),"password"=>base64_encode($this->input->post('password')));
+	 		$name=$this->input->post('full_name');
+	 		$data=array("name"=>$name,"phone"=>$this->input->post('mobile_'),"email"=>$this->input->post('email'),"password"=>base64_encode($this->input->post('password')));
 	 		$res=$this->API->reg_user($data);
+	 		if($res==1){
+	 			$this->sendOtp();
+	 			$otp=rand(11111,99999);
+	 			$this->session->set_userdata('otp',$otp);
+	 		}
 	 		switch ($res) {
-	 			case '0': die(json_encode(array('code'=>0,'msg'=>"Failed to register User."))); break;
-	 			case '1': die(json_encode(array('code'=>1,'msg'=>"Registered Successfully."))); break;
-	 			case '2': die(json_encode(array('code'=>2,'msg'=>"User with same Email already exists.")));
+	 			case '0': die(json_encode(array('code'=>0,'msg'=>"Failed to register User.","mobile"=>$this->input->post('mobile_')))); break;
+	 			case '1': die(json_encode(array('code'=>1,'msg'=>"Registered Successfully.","mobile"=>$this->input->post('mobile_')))); break;
+	 			case '2': die(json_encode(array('code'=>2,'msg'=>"User with same Email already exists.","mobile"=>$this->input->post('mobile_')))); break;
 	 			default: die(json_encode(array('code'=>3,'msg'=>"Server Error.")));
 	 		}
 	 	}
+	 	public function sendOtp(){
+	 		// Authorisation details.
+			$username = "greenvegiess@gmail.com";
+			$hash = "77839a7e1daae7dea24bf3c6f36d06dcf2f2d460e6c99ae6aeeae14a0065171d";
+
+			// Config variables. Consult http://api.textlocal.in/docs for more info.
+			$test = "0";
+
+			// Data for text message. This is the text message data.
+			$sender = "TXTLCL"; // This is who the message appears to be from.
+			$numbers = "916397392256"; // A single number or a comma-seperated list of numbers
+			$message = "This is a test message from the PHP API script.";
+			// 612 chars or less
+			// A single number or a comma-seperated list of numbers
+			$message = urlencode($message);
+			$data = "username=".$username."&hash=".$hash."&message=".$message."&sender=".$sender."&numbers=".$numbers."&test=".$test;
+			$ch = curl_init('http://api.textlocal.in/send/?');
+			curl_setopt($ch, CURLOPT_POST, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			return $result = curl_exec($ch); // This is the result from the API
+
+			curl_close($ch);
+	 	}
 	 	public function sendFeedBack(){
-	 		print_r($_POST);
-	 		Array
-			(
-			    [name] => sdfsd
-			    [email] => rahulkumar14061995@gmail.com
-			    [subject] => sdf
-			    [message] => sdfsdf
-			)
-			// `feedback
+	 		
 			$data=array(
-						"name"=>,
-						"email"=>,
-						"phone"=>,
-						"message"=>,
+						"name"=>$this->input->post('name'),
+						"email"=>$this->input->post('email'),
+						"subject"=>$this->input->post('subject'),
+						"message"=>$this->input->post('message'),
 						);
-	 		// $name=$this->input->post('first_name').' '.$this->input->post('last_name');
-	 		// $data=array("name"=>$name,"email"=>$this->input->post('email'),"password"=>base64_encode($this->input->post('password')));
-	 		// $res=$this->API->reg_user($data);
-	 		// switch ($res) {
-	 		// 	case '0': die(json_encode(array('code'=>0,'msg'=>"Failed to register User."))); break;
-	 		// 	case '1': die(json_encode(array('code'=>1,'msg'=>"Registered Successfully."))); break;
-	 		// 	case '2': die(json_encode(array('code'=>2,'msg'=>"User with same Email already exists.")));
-	 		// 	default: die(json_encode(array('code'=>3,'msg'=>"Server Error.")));
-	 		// }
+			if(count($this->db->where($data)->get('feedback')->result())==0){
+				if($this->db->insert('feedback',$data)){
+					die(json_encode(array('code'=>1,'msg'=>"Feedback Sent.")));
+				}else{
+					die(json_encode(array('code'=>0,'msg'=>"Failed to Send Feedback.")));
+				}
+			}else{
+				die(json_encode(array('code'=>2,'msg'=>"Feedback already Exists.")));
+			}
+	 		
 	 	}
 	 	
 	 }

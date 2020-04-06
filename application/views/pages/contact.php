@@ -62,10 +62,10 @@
 				<div class="col-lg-4 col-sm-12">
                     <div class="contact-info-left">
                         <h2>CONTACT INFO</h2>
-                        <p><?=$webDetail->about_?></p>
+                        <p><?=ucwords($webDetail->about_)?></p>
                         <ul>
                             <li>
-                                <p><i class="fas fa-map-marker-alt"></i>Address:<?=$webDetail->address_?></p>
+                                <p><i class="fas fa-map-marker-alt"></i>Address:<?=ucwords($webDetail->address_)?></p>
                             </li>
                             <li>
                                 <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+91-<?=$webDetail->contact_no?>">+91-<?=$webDetail->contact_no?></a></p>
@@ -97,7 +97,8 @@
                     res=JSON.parse(res);
                     if(res.code==1){
                         swal("Great..!", "We Will Response You Soon.", "success");
-                        location.reload();
+                        $('#contactForm_')[0].reset();
+                        // location.reload();
                     }else{
                         swal("Ooops..!", res.msg, "error");
                     }

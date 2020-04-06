@@ -289,11 +289,11 @@
                 <form class="mt-3  review-form-box" id="formRegister">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="InputName" class="mb-0">First Name</label>
-                            <input type="text" class="form-control" name="first_name" placeholder="First Name"> </div>
+                            <label for="InputName" class="mb-0">Full Name</label>
+                            <input type="text" class="form-control" name="full_name" placeholder="First Name"> </div>
                         <div class="form-group col-md-6">
-                            <label for="InputLastname" class="mb-0">Last Name</label>
-                            <input type="text" class="form-control" name="last_name" placeholder="Last Name"> </div>
+                            <label for="InputLastname" class="mb-0">mobile</label>
+                            <input type="text" class="form-control" name="mobile_" placeholder="Last Name"> </div>
                         <div class="form-group col-md-6">
                             <label for="InputEmail1" class="mb-0">Email Address</label>
                             <input type="email" class="form-control" name="email" placeholder="Enter Email"> </div>
@@ -302,6 +302,37 @@
                             <input type="password" class="form-control" name="password" placeholder="Password"> </div>
                     </div>
                     <input type="submit" class="btn hvr-hover">Register</button>
+                </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div id="otpModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <!-- <p>Some text in the modal.</p> -->
+            <div class="col-sm-12 col-lg-12 mb-3">
+                <div class="title-left">
+                    <h3>Create New Account</h3>
+                </div>
+                
+                <form class="mt-3  review-form-box" id="verifyOtp">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <!-- <label for="InputName" class="mb-0">Enter OTP</label> -->
+                            <?=$this->session->userdata('otp');?>
+                            <input type="text" class="form-control" id="otp_" name="otp_" placeholder="Enter OTP"> </div>
+                            <input type="text" class="form-control" name="mobile_no" id="mobile_no"> </div>
+
+                    </div>
+                    <input type="submit" class="btn btn-success">Verify</button>
                 </form>
             </div>
           </div>
@@ -337,6 +368,27 @@
                 }
             });
         });
+        $(document).on('submit','#verifyOtp',function(e){
+            e.preventDefault();
+            var formData= new FormData($(this)[0]);
+            $.ajax({
+                url:"<?=base_url('API/verifyOTP')?>",
+                type:"post",
+                cache:false,
+                processData:false,
+                contentType:false,
+                data:formData,
+                success:function(res){
+                    console.log(res);
+                    res=JSON.parse(res);
+                    if(res.code==1){
+                        location.reload();
+                    }else{
+                        swal("Ooops..!", res.msg, "error");
+                    }
+                }
+            });
+        });
         $(document).on('submit','#formRegister',function(e){
             e.preventDefault();
             var formData= new FormData($(this)[0]);
@@ -351,8 +403,11 @@
                     // console.log(res);
                     res=JSON.parse(res);
                     if(res.code==1){
-                        swal("Great..!", "Registered Successfully.", "success");
-                        location.reload();
+                        $('#mobile_no').val(res.mobile);
+                        $('#signModal').modal('hide');
+                        $('#otpModal').modal('show');
+                        // swal("Great..!", "Registered Successfully.", "success");
+                        // location.reload();
                     }else{
                         swal("Ooops..!", res.msg, "error");
                     }
