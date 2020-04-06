@@ -1,12 +1,17 @@
 <?php
     $webDetail=$this->db->get('website_name_logo')->row();
 ?>
+<style type="text/css">
+    .img_short{
+        
+    }
+</style>
     <!-- Start Slider -->
     <div id="slides-shop" class="cover-slides">
         <ul class="slides-container">
             <?php foreach ($banners_ as $value) : ?>
                 <li class="text-center">
-                    <img src="<?=base_url('assets/')?>banner_image/<?=$value->banner_path?>" alt="">
+                    <img src="<?=base_url('assets/')?>banner_image/<?=$value->banner_path?>" alt="" class="img_short">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">

@@ -10,7 +10,7 @@
             <?php foreach ($gallery_ as $key => $value) : ?>
                 <div class="item">
                     <div class="ins-inner-box">
-                        <img src="<?=base_url('assets/products_image/').$value->image?>" alt="" style="max-height: 200px"/>
+                        <img src="<?=base_url('assets/products_image/').$value->image?>" alt="" style="height: 180px"/>
                         <!-- <div class="hov-in">
                             <a href="#"><i class="fab fa-instagram"></i></a>
                         </div> -->
@@ -95,10 +95,12 @@
     <a href="#" id="back-to-top" title="Back to top" style="display: none;">&uarr;</a>
 
     <!-- ALL JS FILES -->
+
     <script src="<?=base_url('assets/')?>js/jquery-3.2.1.min.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.6.2/bootstrap-slider.js"></script>
     
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper.min.js"></script> -->
+   
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <!-- ALL PLUGINS -->
     <script src="<?=base_url('assets/')?>js/jquery.superslides.min.js"></script>
@@ -114,6 +116,7 @@
     <script src="<?=base_url('assets/')?>js/form-validator.min.js"></script>
     <script src="<?=base_url('assets/')?>js/contact-form-script.js"></script>
     <script src="<?=base_url('assets/')?>js/custom.js"></script>
+     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper.js"></script> -->
 </body>
 
 </html>
