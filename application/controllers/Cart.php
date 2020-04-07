@@ -7,6 +7,7 @@
 	 	{
 	 		parent::__construct();
 	 	}
+	 	public $deliAddressDetails="";
 	 	public function index(){
 	 		$data['categories']=$this->db->order_by('rand()')->get('categories')->result();
 	 		// echo 'good to go ';
@@ -16,37 +17,82 @@
 	 		$this->load->view('pages/cart');
 	 		$this->load->view('common/footer');
 	 	}
+	 	public function deliveryAddress(){
+	 		// print_r($_POST);
+	 		$this->session->set_userdata('deliveryAddress',serialize($_POST));
+	 		if($this->session->userdata('deliveryAddress')){
+	 			die(json_encode(array("code"=>1)));
+	 		}else{
+	 			die(json_encode(array("code"=>0)));
+	 		}
+
+	 	}
+	 	public function orderConfirmation(){
+	 		$data['categories']=$this->db->order_by('rand()')->get('categories')->result();
+	 		// echo 'good to go ';
+	 		$data['webDetail']=$this->db->get('website_name_logo')->row();
+	 		$data['gallery_']=$this->db->join('categories','categories.id= crops_.veg_category')->order_by('rand()')->get('crops_')->result();
+	 		$this->load->view('common/header',$data);
+	 		$this->load->view('pages/orderConfirmed');
+	 		$this->load->view('common/footer');
+	 	}
 	 	public function orderPlaced(){
+	 		print_r($this->session->deliveryAddress);
 	 		$data['categories']=$this->db->order_by('rand()')->get('categories')->result();
 	 		// echo 'good to go ';
 	 		$data['webDetail']=$this->db->get('website_name_logo')->row();
 	 		$data['gallery_']=$this->db->join('categories','categories.id= crops_.veg_category')->order_by('rand()')->get('crops_')->result();
 
 	 		$cartItems=$this->cart->contents();
+	 		$productIdArr=array();
+	 		$priceArr=array();
+	 		$quantArr=array();
+	 		$paymentMode="Cash";
+	 		$order=array();
+	 		$total=0;
+	 		$tax=0.18;
 	 		foreach ($cartItems as $key => $value) {
-	 			// print_r($value);
-	 			// `cart`(`id`, `user_id`, `product_id`, `quantity`, `price`);
-	 			// [id] => Product-Id-7
-	    //         [qty] => 1
-	    //         [price] => 50
-	    //         [name] => peas
-	    //         [options] => Array
-	    //             (
-	    //                 [image] => coupon_121218044337.jpg
-	    //                 [product_id] => 7
-	    //                 [quant_type] => Kg
-	    //             )
-
-	    //         [rowid] => ccf53d5440335065386229916cb9f864
-	    //         [subtotal] => 50
-	            $session=unserialize($this->session->logged_user);
-	         $order=array("user_id"=>$session[0]->id,"product_id"=>$value['options']['product_id'],"quantity"=>$value['qty'],"price"=>$value['price']);
-	         print_r($order);   
+	 			$productIdArr[]=$value['options']['product_id'];
+	 			$priceArr[]=$value['price'];
+	 			$quantArr[]=$value['qty'];
+	 			$total+=$value['price']*$value['qty'];  
 	 		}
+	 		$taxAmount=$total*$tax;
+	 		$orderAmount=$taxAmount+$total;
+	 		$session=unserialize($this->session->logged_user);
+	 		array_push($order,array("productId"=>$productIdArr,"quantity"=>$quantArr,"price"=>$priceArr,"total"=>$total,"order_amount"=>$orderAmount));
+	 		// print_r($order);
+	 		$orderDetails=array(
+	 							"cart_details"=>serialize($order),
+	 							"user_id"=>$session[0]->id,
+	 							"payment_mode"=>1,
+	 							"amount_status"=>2,
+	 							"deli_add"=>$this->session->deliveryAddress
+	 							);
+	 		// print_r($orderDetails);
+	 		// die;
+	 		if($this->session->userdata('deliveryAddress')){
+	 			if(count($this->db->where($orderDetails)->get('orders_')->result())==0){
+		 			if($this->db->insert('orders_',$orderDetails)){
+		 				$this->session->set_flashdata('msg','Order Placed.');
+		 				$this->cart->destroy();
+		 				$this->session->unset_userdata('deliveryAddress');
+		 			}else{
+		 				$this->session->set_flashdata('msg','Failed To Placed Order.');
+		 			}
+		 		}else{
+		 			$this->session->set_flashdata('msg','Order Already Exists.');
+		 		}	
+	 		}else{
+	 			redirect('Home');
+	 		}
+	 		
+	 		// print_r($orderDetails);
 	 		$this->load->view('common/header',$data);
-	 		$this->load->view('pages/orderConfirmed');
+	 		$this->load->view('pages/orderPlaced');
 	 		$this->load->view('common/footer');
 	 	}
+	 	
 	 	public function addToCart(){
 	 		$productDetails=$this->db->where('product_id',$this->input->post('product_id'))->get('crops_')->row();
 	 		// print_r($productDetails);

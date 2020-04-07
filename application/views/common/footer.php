@@ -108,7 +108,7 @@
     
     <script src="<?=base_url('assets/')?>js/bootstrap-select.js"></script>
     <script src="<?=base_url('assets/')?>js/inewsticker.js"></script>
-    <script src="<?=base_url('assets/')?>js/bootsnav.js."></script>
+    <script src="<?=base_url('assets/')?>js/bootsnav.js"></script>
     <script src="<?=base_url('assets/')?>js/images-loded.min.js"></script>
     <script src="<?=base_url('assets/')?>js/isotope.min.js"></script>
     <script src="<?=base_url('assets/')?>js/owl.carousel.min.js"></script>
