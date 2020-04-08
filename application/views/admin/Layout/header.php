@@ -64,11 +64,19 @@
 			                <li class="nav-item dropdown">
 			                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			                       <i class="fa fa-building" aria-hidden="true"></i>
-			                       <span>Cart</span>
+			                       <span>QR Code</span>
 			                    </a>
-			                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-			                        
-			                        <a class="dropdown-item" href="<?=base_url('Building/ViewBuildingSection')?>"><i class="fa fa-eye" aria-hidden="true"></i> <strong>Cart</strong></a>
+			                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">                     
+			                        <a class="dropdown-item" href="<?=base_url('Admin/QRsection')?>"><i class="fa fa-eye" aria-hidden="true"></i> <strong>Add QR</strong></a>
+			              	    </div>
+			                </li>
+			                <li class="nav-item dropdown">
+			                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			                       <i class="fa fa-building" aria-hidden="true"></i>
+			                       <span>Orders</span>
+			                    </a>
+			                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">                     
+			                        <a class="dropdown-item" href="<?=base_url('Admin/ordersSection')?>"><i class="fa fa-eye" aria-hidden="true"></i> <strong>Orders</strong></a>
 			              	    </div>
 			                </li>
 				           <li class="nav-item dropdown">

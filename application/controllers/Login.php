@@ -13,7 +13,7 @@ class Login extends CI_Controller
 	
 	public function index()
 	{
-		$this->load->view('Pages/login');
+		$this->load->view('admin/Pages/login');
 		$this->session->sess_destroy();
 	}
 

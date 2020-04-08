@@ -19,19 +19,10 @@ class Category extends CI_Controller
 
 	public function addCategory()
 	{
-		$this->db->where('category',$this->input->post('category'));
-                $already=$this->db->get('categories')->result();
-                if($already)
-                {
-                    // $this->session->set_flashdata('msg','Category Already exists');
-                    	die(json_encode(array('status'=>'4','data'=>'Already')));
-                    }
-
-		else{
 			if(!empty($_FILES['userfile']['name']))
 	    	{    
-	       		$ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
-	       		$_FILES['file']['name'] = "category_image-".date("Y-m-d-H-i-s").$ext;
+	       		// $ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+	       		// $_FILES['file']['name'] = "category_image-".date("Y-m-d-H-i-s").$ext;
                 $config['upload_path'] = 'assets/category_image/';
                 $config['allowed_types'] = 'jpg|jpeg|png|gif';
                 $config['file_name'] = $_FILES['userfile']['name'];
@@ -56,11 +47,13 @@ class Category extends CI_Controller
             }
             if(!empty($uploadData))
 	        {				
-             	$data=array("category"=>$this->input->post('category'),
-             		
-			 		    "image_"=>$picture);
-             	;
-             	$results=$this->Category->addCategory($data);
+             	$category=$this->input->post('category');
+             	$image=$picture ;
+			 		   
+             	// print_r($image);
+             	// die;
+             	
+             	$results=$this->Category->addCategory($category,$image);
              	if($results==1)
              	{
              		die(json_encode(array('status'=>'1','data'=>$results)));
@@ -81,7 +74,7 @@ class Category extends CI_Controller
 	        	die(json_encode(array('status'=>'3','data'=>'Choose Image')));
 	        }
 
-	       }
+	     
 	    
 
        }	        

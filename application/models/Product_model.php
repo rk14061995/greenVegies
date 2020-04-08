@@ -124,5 +124,52 @@ class Product_model extends CI_Model
 			{
 				return 0;
 		    }
-	} 
+	}
+	public function WebdetailsData()
+	{
+	    	return $this->db->get('website_name_logo')->result();
+	}
+	public function Update_webInfo($data)
+	{
+		$this->db->where($data);
+		 $results=$this->db->update('website_name_logo',$data);
+		
+			if($results)
+			{
+				return 1;
+			}
+	
+			else
+			{
+				return 0;
+		    }
+	}
+	public function AddQRimage($data)
+	{
+	  $this->db->where($data);
+		$re=$this->db->get('qr_image')->result();
+		if(count($re)==0)
+		{
+			$results=$this->db->insert('qr_image',$data);
+			if($results)
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+
+		}
+		else
+		{
+			return 2;
+	    }  
+	}
+	public function getorders()
+	{
+	    	return $this->db->get('orders_')->result();
+	}
+
+
 }

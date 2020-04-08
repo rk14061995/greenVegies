@@ -1,25 +1,25 @@
-
-            <h5 class="title font-weight-bold space bg-light p-3">Category / Add Category</h5>
-                <form class="mt-5" id="category">
+            <h5 class="title font-weight-bold space bg-light p-3">QR Image / Add QR</h5>
+            
+                <form class="mt-5" id="QR">
+                   <!--  <div class="row">
+                        <div class="  col-md-2">
+                            <label for="email" class="ml-5" >Banner Name :</label>
+                        </div>
+                        <div class="col-md-10">
+                        <input class="form-control "type="text" required name="amenities">
+                        </div>
+                    </div> -->
                     <div class="row">
                         <div class=" col-md-2">
-                            <label for="email" class="ml-5">Category :</label>
+                            <label for="email" >QR Image :</label>
                         </div>
                         <div class="col-md-9">
-                        <input class="form-control "type="text" required name="category">
+                        <input class="form-control" type="file"  name="userfile" required >
                         </div>
                     </div>
-                    <div class="row">
-                        <div class=" col-md-2">
-                            <label for="email" class="ml-5">Category Image:</label>
-                        </div>
-                        <div class="col-md-9">
-                        <input class="" type="file"  name="userfile" required >
-                        </div>
-                    </div>
-                    <div class="row mt-4">
+                    <div class="row mt-5">
                         <div class="col-md-3">
-                        <button type="submit"  class="w-75 rounded-pill border-0 p-2 text-white font-weight-bold butn-style">Add</button>
+                           <button type="submit"  class="w-75 rounded-pill border-0 p-2 text-white font-weight-bold butn-style">Add</button>
                         </div>
                     </div>
                     <div class="row mt-5">
@@ -34,11 +34,11 @@
 </body>
 </html>
 <script type="text/javascript"> 
-$(document).on('submit','#category',function(e){
+$(document).on('submit','#QR',function(e){
      e.preventDefault();
      var formData= new FormData($(this)[0]);
      $.ajax({
-        url:"<?=base_url('Category/addCategory')?>",
+        url:"<?=base_url('Admin/AddQRCode')?>",
          type:"post",
          catche:false,
          contentType:false,
@@ -50,18 +50,17 @@ $(document).on('submit','#category',function(e){
              console.log(obj.status);
              if(obj.status==0)
              {
-                swal("Category!", "Try Error", "error")
+                swal("QR!", "Try Error", "error")
              }
              if(obj.status==1)
              {
-              swal("Category!", "Added", "success")
+              swal("QR!", "Added", "success")
              }
              if(obj.status==2)
              {
-             swal("Category!", "Already Exist", "error")
+             swal("QR!", "Already Exist", "error")
              }
-             
-             // window.location.href='<?=base_url("Category/CategorySection")?>';
+             // window.location.href='<?=base_url("Products/BannerSection")?>';
         }
      });
 });

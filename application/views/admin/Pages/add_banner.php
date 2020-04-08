@@ -60,7 +60,7 @@ $(document).on('submit','#banner',function(e){
              {
              swal("Banner!", "Already Exist", "error")
              }
-             window.location.href='<?=base_url("Products/BannerSection")?>';
+             // window.location.href='<?=base_url("Products/BannerSection")?>';
         }
      });
 });
