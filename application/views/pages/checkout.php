@@ -55,7 +55,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="address">Address *</label>
-                                <input type="text" class="form-control" name="address" value="<?=$session[0]->address?>" placeholder="" required>
+                                <input type="text" class="form-control" name="address" id="address" value="<?=$session[0]->address?>" placeholder="" required>
                                 <div class="invalid-feedback"> Please enter your shipping address. </div>
                             </div>
                             <!-- <div class="mb-3">
@@ -164,25 +164,35 @@
     $(document).on('submit','#DeliveryAdd',function(e){
         e.preventDefault();
         var formData= new FormData($(this)[0]);
-        $.ajax({
-            url:"<?=base_url('Cart/deliveryAddress')?>",
-            type:"post",
-            cache:false,
-            contentType:false,
-            processData:false,
-            data:formData,
-            success:function(res){
-                console.log(res);
-                res=JSON.parse(res);
-                if(res.code==1){
-                    swal("Great..!", "Address Add!", "success");
-                    $('#placOrde').show();
-                }else{
-                    swal("OOoops!", "Failed To Add Address", "error");
-                }
-                // $('#placOrde').show();
+        if($('#address').val()!=""){
+            if($('#address').val().length>15){
+                $.ajax({
+                    url:"<?=base_url('Cart/deliveryAddress')?>",
+                    type:"post",
+                    cache:false,
+                    contentType:false,
+                    processData:false,
+                    data:formData,
+                    success:function(res){
+                        console.log(res);
+                        res=JSON.parse(res);
+                        if(res.code==1){
+                            swal("Great..!", "Address Add!", "success");
+                            $('#placOrde').show();
+                        }else{
+                            swal("OOoops!", "Failed To Add Address", "error");
+                        }
+                        location.reload();
+                    }
+                });
+            }else{
+                swal("OOoops!", "Please Proper Address", "error");
             }
-        });
+            
+        }else{
+            swal("OOoops!", "Address cannot be null", "error");
+        }
+       
     });
 </script>
   
