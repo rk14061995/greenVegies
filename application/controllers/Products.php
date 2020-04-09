@@ -21,6 +21,7 @@ class Products extends CI_Controller
 		$this->load->view('admin/Pages/add_products',$data);
 		// $this->load->view('Layout/footer');
 	}
+	
 	public function get_States()
     {
         $data=$this->products->fetchState_Byid($this->input->post('countryid'));
@@ -53,7 +54,11 @@ class Products extends CI_Controller
 	public function add_Products()
 	{	
 		$data = array();
-		        
+		    if($this->input->post('status')=='on'){
+                $status=1;
+            }else{
+                $status=0;
+            }
 		  if(!empty($_FILES['files']['name']))
 		    {
 		         $filesCount = count($_FILES['files']['name']);
@@ -103,7 +108,7 @@ class Products extends CI_Controller
 							// "country"=>$this->input->post('country'),
 							// "city"=>$this->input->post('city'),
 							// "state"=>$this->input->post('state'),
-							"status"=>$this->input->post('status'),
+							"status"=>$status,
 							"discount"=>$this->input->post('discount'),
 							"totl_quant"=>$this->input->post('totl_quant'),
 					 		"image"=>$pics);

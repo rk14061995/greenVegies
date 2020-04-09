@@ -16,6 +16,9 @@ class Product_model extends CI_Model
 		$this->db->where('state_id',$stateId);
 		return $this->db->get('cities')->result();
 	}
+	public function getProductDetial($id){
+		return $this->db->where("product_id",$id)->get('crops_')->row();
+	}
 	public function insert_Products($data)
 	{
 		$this->db->where($data);
@@ -37,6 +40,13 @@ class Product_model extends CI_Model
 		{
 			return 2;
 	    }
+	}
+	public function update_Products($data, $pro_id){
+		if($this->db->where('product_id',$pro_id)->update('crops_',$data)){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	

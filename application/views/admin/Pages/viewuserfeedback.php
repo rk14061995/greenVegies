@@ -21,7 +21,7 @@
                             <th class="font text-center">SNo</th>
                             <th class="font text-center">User Name</th>
                             <th class="font text-center">User Email</th>
-                            <th class="font text-center">Contact</th>
+                            <th class="font text-center">Subject</th>
                             <th class="font text-center">Message</th>
                             <th class="font text-center">Date</th>
                         </tr>
@@ -38,7 +38,7 @@
                     <td><?=$i?></td>
                     <td><?=$row->name?></td>
                     <td><?=$row->email?></td>
-                    <td><?=$row->phone?></td>
+                    <td><?=$row->subject?></td>
                     <td><?=$row->message?></td>
                     <td><?=$row->added_on?></td>
                   

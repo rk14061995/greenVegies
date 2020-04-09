@@ -47,7 +47,7 @@
                     $myImages=explode(',',$row->image);
                     
                       ?>
-                    <td><img style="width:5em;"src="<?php echo base_url().'assets/products_image/'.$myImages[0]?>" class="img-reponsive thumbnail "></td>
+                    <td><img style="width:50px; height: 50px"src="<?php echo base_url().'assets/products_image/'.$myImages[0]?>" class="img-reponsive rounded-circle "></td>
                     <td><?=$row->name?></td>
                     <td><?=$row->description?></td>
                     <td><?=$row->category?></td>
@@ -68,7 +68,7 @@
                     <td><?=$row->quant_type?></td>
                      <td><?=$row->qty_left?></td>
                     <!-- <td><a href="<?=base_url('Building/editBuilding/').$row->product_id?>"  class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style building">Edit</a></td> -->
-                    <td><a href="javascript:void(0)" product_id="<?=$row->product_id?>" class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style1 deleteproduct">Delete</a></td>
+                    <td><a href="<?=base_url('Admin/editProductView/').$row->product_id?>"  class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style building">Edit</a><a href="javascript:void(0)" product_id="<?=$row->product_id?>" class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style1 deleteproduct">Delete</a></td>
                   </tr>
                 <?php
              
@@ -103,7 +103,7 @@
                   response=JSON.parse(response);             
                      if (response==1)
                       {
-                   swal('Banner!','Deleted','success');
+                   swal('Product','Deleted','success');
                     location.reload();
                     
                        }

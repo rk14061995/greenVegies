@@ -15,62 +15,53 @@
               }
             ?> 
             <div class="row mt-5">
-                <table class="table table-responsive">
+                <table class="table text-center " width="100%">
                     <thead>
                         <tr>
                             <th class="font text-center">SNo</th>
-                            <th class="font text-center">Image</th>
-                            <th class="font text-center"> Name</th>
-                            <th class="font text-center">Descripton</th>
-                            <th class="font text-center">Category</th> 
+                            <th class="font text-center">Ordered By</th>
+                            <th class="font text-center">Order Details</th>
+                             
                             <th class="font text-center">Status</th>
-                            <th class="font text-center">Price</th>
-                            <th class="font text-center">Discount</th>
-                            <th class="font text-center">Total Qu.</th>
-                            <th class="font text-center">Qu.Type</th>
-                            <th class="font text-center">Qu.Left</th>
+                            <th class="font text-center">Total Amount</th>
+                            
+                            
+                            <th class="font text-center">Payment Status</th>
                             <th class="font text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody >
             <?php
               $i=1;
-              // print_r($viewowner);
-              $test = unserialize($fetchorders['deli_add']); 
-                 print_r($test); 
+              
               foreach($fetchorders as $row)
               {
+                $deliveryDetails=unserialize($row['deli_add']);
+                $cartDet=unserialize($row['cart_details']);
+                // print_r($deliveryDetails);
                            
                 ?>
                   <tr>
                     <td><?=$i?></td>
-                    <?php
-                 
-                    $myImages=explode(',',$row->image);
-                    
+                    <td><?=$deliveryDetails['fullname']?></td>
+                    <td><a href="<?=base_url('Admin/viewOrderDetails/').$row['order_id']?>">View Order</a>
+                      <?php
+                        $product_Detail=$row['product_Detail'];
+                        // print_r($product_Detail);
+                        // foreach ($product_Detail as $item) {
+
+                        // }
                       ?>
-                    <td><img style="width:5em;"src="<?php echo base_url().'assets/products_image/'.$myImages[0]?>" class="img-reponsive thumbnail "></td>
-                    <td><?=$row->name?></td>
-                    <td><?=$row->description?></td>
-                    <td><?=$row->category?></td>
-                    <?php
-                    if($row->status==1)
-                    {
-                      echo'<td>'."Active".'</td>';
-                    }
-                    else
-                    {
-                      echo'<td>'."Deactive".'</td>';
-                    }
-                     ?>
+
+                    <td>
+                      <select class="form-control">
+                        <option>Packed</option>
+                      </select>
+                      <?=$row['order_status']?></td>
+                    <td><strong>&#8377;</strong> <?=$cartDet[0]['order_amount']?></td>
                     
-                    <td><?=$row->price?></td>
-                    <td><?=$row->discount?></td>
-                    <td><?=$row->totl_quant?></td>
-                    <td><?=$row->quant_type?></td>
-                     <td><?=$row->qty_left?></td>
-                    <!-- <td><a href="<?=base_url('Building/editBuilding/').$row->product_id?>"  class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style building">Edit</a></td> -->
-                    <td><a href="javascript:void(0)" product_id="<?=$row->product_id?>" class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style1 deleteproduct">Delete</a></td>
+                    <td><a href="javascript:void(0)" product_id="" class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style1 deleteproduct"><?=$row['amount_status']?></a></td>
+                    <td><a href=""  class="w-100 rounded-pill border-0 p-2 text-white font-weight-bold butn-style building">Reject</a></td>
                   </tr>
                 <?php
              
